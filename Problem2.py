@@ -24,5 +24,11 @@ def hsv_equalize(image):
 original_image = cv2.imread(ORIGINAL_IMAG_PATH)
 
 show_image_and_wait(original_image)
-show_image_and_wait(rgb_equalize(original_image))
-show_image_and_wait(hsv_equalize(original_image))
+
+rgb_equalized_image = rgb_equalize(original_image)
+show_image_and_wait(rgb_equalized_image)
+cv2.imwrite('out/rgb_equalized.png', rgb_equalized_image)
+
+hsv_equalized_image = hsv_equalize(original_image)
+show_image_and_wait(hsv_equalized_image)
+cv2.imwrite('out/hsv_equalized.png', hsv_equalized_image)
