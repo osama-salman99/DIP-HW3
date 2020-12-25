@@ -6,7 +6,7 @@ NOISY_IMAGE_PATH = 'res/JetNoisy.gif'
 
 def evaluate_filter(filtered_image, filter_name):
     show_image_and_wait(filtered_image, filter_name)
-    cv2.imwrite(f'{filter_name} filtered.png', filtered_image)
+    cv2.imwrite(f'out/{filter_name} filtered.png', filtered_image)
     print(f'PSNR for the {filter_name} filter = ', PSNR(filtered_image, original_image))
 
 
