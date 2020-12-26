@@ -5,11 +5,9 @@ ORIGINAL_IMAG_PATH = 'res/Peppers.tiff'
 
 def rgb_equalize(image):
     blue, green, red = cv2.split(image)
-
     red_equalized = cv2.equalizeHist(red)
     blue_equalized = cv2.equalizeHist(blue)
     green_equalized = cv2.equalizeHist(green)
-
     return cv2.merge([blue_equalized, green_equalized, red_equalized])
 
 

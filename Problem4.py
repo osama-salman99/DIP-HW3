@@ -13,9 +13,9 @@ def evaluate_filter(filtered_image, filter_name):
 
 
 def arithmetic_mean_filter_image(image):
-    arithmetic_mean_filter = np.vectorize(arithmetic_mean_filter_pixel, excluded=[0])
+    adaptive_filter = np.vectorize(arithmetic_mean_filter_pixel, excluded=[0])
     y, x = np.indices(noisy_image.shape)
-    filtered_image = arithmetic_mean_filter(image, y, x, mask_size)
+    filtered_image = adaptive_filter(image, y, x, mask_size)
     return filtered_image
 
 
@@ -44,9 +44,9 @@ def geometric_mean_filter_pixel(image, y, x, segment_size):
 
 
 def adaptive_filter_image(image, noise_variance):
-    arithmetic_mean_filter = np.vectorize(adaptive_filter_pixel, excluded=[0])
+    adaptive_filter = np.vectorize(adaptive_filter_pixel, excluded=[0])
     y, x = np.indices(noisy_image.shape)
-    filtered_image = arithmetic_mean_filter(image, y, x, mask_size, noise_variance)
+    filtered_image = adaptive_filter(image, y, x, mask_size, noise_variance)
     return filtered_image
 
 
