@@ -26,13 +26,13 @@ def adjust_image_to_BGR(image):
 def replace_color_with(image, center, radius, color):
     distance, distance2 = find_color_distance(image, center)
 
-    color_replaced_image = image - center
-    color_replaced_image += color
-    color_replaced_image += distance2
+    # color_replaced_image = image - center
+    # color_replaced_image += color
+    # color_replaced_image += distance2
+    #
+    # color_replaced_image = np.clip(color_replaced_image, 0, 1)
 
-    color_replaced_image = np.clip(color_replaced_image, 0, 1)
-
-    # color_replaced_image = np.full_like(image, color)
+    color_replaced_image = np.full_like(image, color)
 
     return np.where(distance <= radius, color_replaced_image, image)
 
@@ -46,13 +46,13 @@ center1 = [179 / 255, 40 / 255, 50 / 255]
 radius1 = 0.06
 sliced_image = replace_color_with(original_image, center1, radius1, replace_color)
 
-center2 = [225 / 255, 89 / 255, 103 / 255]
-radius2 = 10 / 255
-sliced_image = replace_color_with(sliced_image, center2, radius2, replace_color)
-
-center3 = [100 / 255, 20 / 255, 30 / 255]
-radius3 = 3.5 / 255
-sliced_image = replace_color_with(sliced_image, center3, radius3, replace_color)
+# center2 = [225 / 255, 89 / 255, 103 / 255]
+# radius2 = 10 / 255
+# sliced_image = replace_color_with(sliced_image, center2, radius2, replace_color)
+#
+# center3 = [100 / 255, 20 / 255, 30 / 255]
+# radius3 = 3.5 / 255
+# sliced_image = replace_color_with(sliced_image, center3, radius3, replace_color)
 
 show_image_and_wait(adjust_image_to_BGR(sliced_image))
 cv2.imwrite('out/sliced.png', adjust_image_to_BGR(sliced_image))

@@ -3,6 +3,8 @@ from Helping import *
 ORIGINAL_IMAGE_PATH = 'res/Jet.gif'
 NOISY_IMAGE_PATH = 'res/JetNoisy.gif'
 
+mask_size = 5
+
 
 def evaluate_filter(filtered_image, filter_name):
     show_image_and_wait(filtered_image, filter_name)
@@ -13,7 +15,7 @@ def evaluate_filter(filtered_image, filter_name):
 def arithmetic_mean_filter_image(image):
     arithmetic_mean_filter = np.vectorize(arithmetic_mean_filter_pixel, excluded=[0])
     y, x = np.indices(noisy_image.shape)
-    filtered_image = arithmetic_mean_filter(image, y, x, 5)
+    filtered_image = arithmetic_mean_filter(image, y, x, mask_size)
     return filtered_image
 
 
@@ -28,7 +30,7 @@ def arithmetic_mean_filter_pixel(image, y, x, segment_size):
 def geometric_mean_filter_image(image):
     arithmetic_mean_filter = np.vectorize(geometric_mean_filter_pixel, excluded=[0])
     y, x = np.indices(noisy_image.shape)
-    filtered_image = arithmetic_mean_filter(image, y, x, 5)
+    filtered_image = arithmetic_mean_filter(image, y, x, mask_size)
     return filtered_image
 
 
@@ -44,7 +46,7 @@ def geometric_mean_filter_pixel(image, y, x, segment_size):
 def adaptive_filter_image(image, noise_variance):
     arithmetic_mean_filter = np.vectorize(adaptive_filter_pixel, excluded=[0])
     y, x = np.indices(noisy_image.shape)
-    filtered_image = arithmetic_mean_filter(image, y, x, 5, noise_variance)
+    filtered_image = arithmetic_mean_filter(image, y, x, mask_size, noise_variance)
     return filtered_image
 
 
@@ -63,10 +65,10 @@ def get_segment(image, y, x, segment_size):
     sze = segment_size // 2
 
     y_start = max(y - sze, 0)
-    y_end = min(y + sze, height)
+    y_end = min(y + sze + 1, height)
 
     x_start = max(x - sze, 0)
-    x_end = min(x + sze, width)
+    x_end = min(x + sze + 1, width)
 
     return image[y_start:y_end, x_start:x_end]
 
